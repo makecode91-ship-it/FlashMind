@@ -2,15 +2,15 @@
 
 **FlashMind** is an early-stage AI-powered learning platform designed to help students learn faster, stay motivated, and create better study materials.
 
-The project combines flashcards, quizzes, notes, courses, progress tracking, streaks, coins, rewards, and AI-generated learning content in one clean workspace.
+FlashMind combines AI-generated quizzes, flashcards, notes, courses, progress tracking, streaks, coins, rewards, and gamification in one clean learning workspace.
 
-## Overview
+## About the Project
 
-FlashMind is being built to solve a common problem: many students want to learn consistently, but they struggle with motivation, organization, and creating useful study materials.
+Many students struggle with motivation, organization, and creating effective study materials. FlashMind is being built to solve this problem by making learning more interactive, personalized, and consistent.
 
-FlashMind helps users turn topics, notes, and learning goals into interactive study sessions using AI. The goal is to make learning more personalized, more engaging, and easier to continue every day.
+The goal of FlashMind is not only to give users answers, but to help them understand topics, practice actively, and build better learning habits.
 
-## Planned Features
+## Key Features
 
 * AI-generated quizzes
 * AI-generated flashcards
@@ -18,43 +18,51 @@ FlashMind helps users turn topics, notes, and learning goals into interactive st
 * Course and lesson organization
 * Personalized study sessions
 * Progress statistics
-* Streaks and daily learning goals
+* Daily streaks and learning goals
 * Coins, rewards, and gamification
 * Multi-language learning support
-* Voice-based learning assistant
+* Voice-based AI learning assistant
 
 ## Project Status
 
 FlashMind is currently in active development and preparing for an early access release.
 
 This repository contains only the public landing page for the project.
-The main application code is private and is not included in this repository.
+The main FlashMind application code is private and is not included in this repository.
 
-## Purpose of This Repository
+## Repository Purpose
 
-This repository is used to host the public landing page for FlashMind.
+This repository is used to host and present the public landing page for FlashMind.
 
 It includes:
 
-* `index.html` — the landing page
+* `index.html` — the public landing page
 * basic project information
-* public-facing description of the product
+* public-facing product description
 
-No API keys, backend code, user data, or private application logic are stored here.
+This repository does not contain:
+
+* API keys
+* backend code
+* database files
+* user data
+* private application logic
+* production secrets
 
 ## Vision
 
-The vision of FlashMind is to make AI-assisted learning accessible, motivating, and useful for students and self-learners.
+FlashMind aims to make AI-assisted learning accessible, motivating, and useful for students, self-learners, and people who want to study more effectively.
 
-Instead of only giving users answers, FlashMind aims to help them understand topics, practice actively, track their progress, and build consistent learning habits.
+By combining artificial intelligence with active recall, gamification, and progress tracking, FlashMind helps users create study materials faster and stay consistent for longer.
 
 ## Contact
 
 For questions, feedback, or early access information, contact:
 
-**[flashmind.app@gmail.com](mailto:flashmind.contact@gmail.com)**
+**[flashmind.contact@gmail.com](mailto:flashmind.contact@gmail.com)**
 
 ## License
 
-This landing page is provided for public project presentation purposes.
+This repository is used for public project presentation purposes.
+
 The main FlashMind application is currently private.
