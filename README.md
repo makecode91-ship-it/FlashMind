@@ -52,7 +52,7 @@ Instead of only giving users answers, FlashMind aims to help them understand top
 
 For questions, feedback, or early access information, contact:
 
-**[flashmind.app@gmail.com](mailto:flashmind.app@gmail.com)**
+**[flashmind.app@gmail.com](mailto:flashmind.contact@gmail.com)**
 
 ## License
 
