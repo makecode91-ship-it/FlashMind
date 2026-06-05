@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>FlashMind — AI Learning Platform</title>
 
   <meta
     name="description"
-    content="FlashMind is an AI-powered learning platform with flashcards, quizzes, notes, courses, streaks, statistics, and gamified rewards."
+    content="FlashMind is an AI-powered learning platform with flashcards, quizzes, notes, courses, streaks, statistics, coins, rewards, and personalized AI study sessions."
   />
 
   <style>
@@ -15,10 +16,12 @@
       --bg: #f8fafc;
       --text: #0f172a;
       --muted: #64748b;
-      --card: rgba(255, 255, 255, 0.72);
-      --border: rgba(148, 163, 184, 0.25);
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
+      --card: rgba(255, 255, 255, 0.74);
+      --border: rgba(148, 163, 184, 0.28);
+      --primary: #f5b301;
+      --primary-dark: #d99a00;
+      --blue: #2563eb;
+      --dark: #111827;
       --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
       --radius: 28px;
     }
@@ -39,11 +42,16 @@
         Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 32rem),
-        radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 28rem),
+        radial-gradient(circle at top left, rgba(245, 179, 1, 0.18), transparent 34rem),
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.11), transparent 30rem),
+        radial-gradient(circle at 50% 20%, rgba(14, 165, 233, 0.08), transparent 34rem),
         var(--bg);
       color: var(--text);
       overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
     }
 
     .page {
@@ -62,20 +70,21 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -0.04em;
       font-size: 22px;
     }
 
     .logo-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 14px;
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      background: linear-gradient(135deg, #f5b301, #ffcc33);
       display: grid;
       place-items: center;
-      color: white;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+      color: #111827;
+      box-shadow: 0 14px 30px rgba(245, 179, 1, 0.3);
+      font-weight: 900;
     }
 
     nav {
@@ -88,7 +97,7 @@
       text-decoration: none;
       color: var(--muted);
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     nav a:hover {
@@ -99,7 +108,7 @@
       padding: 10px 16px;
       border: 1px solid var(--border);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.62);
       backdrop-filter: blur(16px);
       color: var(--text);
     }
@@ -107,7 +116,7 @@
     .hero {
       padding: 72px 0 64px;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.04fr 0.96fr;
       gap: 54px;
       align-items: center;
     }
@@ -117,17 +126,17 @@
       padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.62);
-      color: var(--primary-dark);
+      background: rgba(255, 255, 255, 0.68);
+      color: #8a6400;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 24px;
       box-shadow: 0 8px 28px rgba(15, 23, 42, 0.04);
       backdrop-filter: blur(14px);
     }
 
     h1 {
-      max-width: 680px;
+      max-width: 700px;
       font-size: clamp(48px, 7vw, 82px);
       line-height: 0.95;
       letter-spacing: -0.075em;
@@ -135,14 +144,14 @@
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      background: linear-gradient(135deg, #f5b301, #2563eb);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .hero-text {
-      max-width: 610px;
+      max-width: 620px;
       color: var(--muted);
       font-size: 20px;
       line-height: 1.7;
@@ -164,7 +173,7 @@
       padding: 14px 20px;
       border-radius: 999px;
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 900;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -173,149 +182,86 @@
     }
 
     .button-primary {
-      background: var(--primary);
+      background: #111827;
       color: white;
-      box-shadow: 0 18px 34px rgba(37, 99, 235, 0.28);
+      box-shadow: 0 18px 34px rgba(17, 24, 39, 0.22);
     }
 
     .button-primary:hover {
-      box-shadow: 0 22px 42px rgba(37, 99, 235, 0.36);
+      box-shadow: 0 22px 42px rgba(17, 24, 39, 0.3);
     }
 
     .button-secondary {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.74);
       color: var(--text);
       border: 1px solid var(--border);
       backdrop-filter: blur(14px);
     }
 
-    .mockup {
+    .hero-preview {
       position: relative;
     }
 
-    .app-card {
+    .hero-card {
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--card);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.74);
       box-shadow: var(--shadow);
       overflow: hidden;
       backdrop-filter: blur(24px);
       transform: rotate(1deg);
     }
 
-    .app-topbar {
+    .hero-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-card-footer {
+      padding: 18px 20px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      padding: 18px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.55);
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      border-top: 1px solid var(--border);
     }
 
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: #cbd5e1;
-    }
-
-    .dot:nth-child(1) {
-      background: #f87171;
-    }
-
-    .dot:nth-child(2) {
-      background: #facc15;
-    }
-
-    .dot:nth-child(3) {
-      background: #4ade80;
-    }
-
-    .app-content {
-      padding: 24px;
-    }
-
-    .study-card {
-      padding: 24px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
-      color: white;
-      margin-bottom: 18px;
-      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.26);
-    }
-
-    .study-card span {
+    .hero-card-footer strong {
       display: block;
-      font-size: 13px;
-      opacity: 0.82;
-      margin-bottom: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: -0.03em;
+      font-size: 17px;
     }
 
-    .study-card h2 {
-      font-size: 28px;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .study-card p {
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .mini-card {
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.72);
-      padding: 18px;
-    }
-
-    .mini-card strong {
+    .hero-card-footer span {
       display: block;
-      font-size: 26px;
-      letter-spacing: -0.04em;
-      margin-bottom: 4px;
-    }
-
-    .mini-card span {
       color: var(--muted);
       font-size: 14px;
-      font-weight: 600;
+      margin-top: 3px;
     }
 
-    .progress {
-      height: 12px;
+    .coin-pill {
+      white-space: nowrap;
+      padding: 9px 12px;
       border-radius: 999px;
-      background: #e2e8f0;
-      overflow: hidden;
-      margin-top: 18px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 72%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #2563eb, #38bdf8);
+      background: rgba(245, 179, 1, 0.16);
+      border: 1px solid rgba(245, 179, 1, 0.34);
+      color: #8a6400;
+      font-weight: 900;
+      font-size: 14px;
     }
 
     .floating-card {
       position: absolute;
       right: -14px;
       bottom: -22px;
-      width: 210px;
+      width: 225px;
       padding: 16px;
       border-radius: 22px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid var(--border);
       box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
       backdrop-filter: blur(20px);
@@ -338,7 +284,7 @@
     }
 
     .section-title {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto 36px;
       text-align: center;
     }
@@ -365,7 +311,7 @@
     .feature {
       padding: 24px;
       border-radius: 26px;
-      background: rgba(255, 255, 255, 0.68);
+      background: rgba(255, 255, 255, 0.7);
       border: 1px solid var(--border);
       box-shadow: 0 14px 40px rgba(15, 23, 42, 0.05);
       backdrop-filter: blur(18px);
@@ -375,11 +321,11 @@
       width: 46px;
       height: 46px;
       border-radius: 16px;
-      background: #eff6ff;
+      background: rgba(245, 179, 1, 0.16);
       display: grid;
       place-items: center;
       margin-bottom: 18px;
-      color: var(--primary);
+      color: #8a6400;
       font-size: 22px;
     }
 
@@ -394,16 +340,156 @@
       line-height: 1.65;
     }
 
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1.16fr 0.84fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .preview-card {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .preview-card.large {
+      grid-row: span 2;
+    }
+
+    .preview-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.25s ease;
+    }
+
+    .preview-card:hover img {
+      transform: scale(1.025);
+    }
+
+    .preview-label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      color: white;
+      font-size: 14px;
+      font-weight: 900;
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .status-box {
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.7;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.05);
+      backdrop-filter: blur(18px);
+    }
+
+    .status-box strong {
+      color: var(--text);
+    }
+
+    .use-case {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      align-items: center;
+      padding: 34px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.07);
+      backdrop-filter: blur(18px);
+    }
+
+    .use-case h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin-bottom: 16px;
+    }
+
+    .use-case p {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .use-case-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .use-case-item {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .use-case-item strong {
+      color: var(--text);
+    }
+
     .cta {
       margin: 32px 0 78px;
       padding: 52px;
       border-radius: 34px;
       background:
-        linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(14, 165, 233, 0.95)),
-        #2563eb;
+        linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(31, 41, 55, 0.96)),
+        #111827;
       color: white;
       text-align: center;
-      box-shadow: 0 26px 80px rgba(37, 99, 235, 0.28);
+      box-shadow: 0 26px 80px rgba(17, 24, 39, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto -120px;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: rgba(245, 179, 1, 0.24);
+      filter: blur(20px);
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      right: -130px;
+      bottom: -130px;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.22);
+      filter: blur(20px);
+    }
+
+    .cta > * {
+      position: relative;
+      z-index: 1;
     }
 
     .cta h2 {
@@ -414,7 +500,7 @@
     }
 
     .cta p {
-      max-width: 670px;
+      max-width: 700px;
       margin: 0 auto 28px;
       font-size: 18px;
       line-height: 1.7;
@@ -423,7 +509,7 @@
 
     .cta .button {
       background: white;
-      color: var(--primary-dark);
+      color: #111827;
       box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
     }
 
@@ -444,11 +530,27 @@
         padding-top: 42px;
       }
 
-      .app-card {
+      .hero-card {
         transform: none;
       }
 
       .features {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-card.large {
+        grid-row: auto;
+      }
+
+      .preview-card img {
+        min-height: auto;
+      }
+
+      .use-case {
         grid-template-columns: 1fr;
       }
 
@@ -479,12 +581,21 @@
         width: 100%;
       }
 
-      .mini-grid {
-        grid-template-columns: 1fr;
+      .hero-card-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .coin-pill {
+        width: fit-content;
       }
 
       .floating-card {
         display: none;
+      }
+
+      .use-case {
+        padding: 24px;
       }
 
       .cta {
@@ -498,21 +609,23 @@
   <div class="page">
     <header>
       <div class="logo">
-        <div class="logo-icon">✦</div>
+        <div class="logo-icon">⚡</div>
         <span>FlashMind</span>
       </div>
 
       <nav>
         <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="#ai">AI Use Case</a>
         <a href="#vision">Vision</a>
-        <a class="nav-button" href="mailto:contact@flashmind.app">Contact</a>
+        <a class="nav-button" href="mailto:flashmind.contact@gmail.com">Contact</a>
       </nav>
     </header>
 
     <main>
       <section class="hero">
         <div>
-          <div class="badge">AI-powered learning · Early access soon</div>
+          <div class="badge">AI-powered learning · Early access in development</div>
 
           <h1>
             Learn faster with your
@@ -520,64 +633,44 @@
           </h1>
 
           <p class="hero-text">
-            FlashMind helps students turn notes into flashcards, quizzes,
-            summaries, courses, and personalized study sessions — with progress
-            tracking, streaks, coins, and rewards that make learning feel alive.
+            FlashMind helps students turn topics, notes, and learning goals into
+            flashcards, quizzes, summaries, courses, and personalized study
+            sessions — with streaks, coins, rewards, and progress tracking.
           </p>
 
           <div class="actions">
-            <a class="button button-primary" href="#features">
-              Explore features →
+            <a class="button button-primary" href="#preview">
+              View product preview →
             </a>
-            <a class="button button-secondary" href="mailto:contact@flashmind.app">
-              Contact us
+            <a class="button button-secondary" href="mailto:flashmind.contact@gmail.com">
+              Request early access
             </a>
           </div>
         </div>
 
-        <div class="mockup" aria-label="FlashMind app preview">
-          <div class="app-card">
-            <div class="app-topbar">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
+        <div class="hero-preview" aria-label="FlashMind product preview">
+          <div class="hero-card">
+            <img
+              src="assets/preview-dashboard.png"
+              alt="FlashMind learning dashboard with streaks, coins, daily challenge, and recent flashcards"
+            />
 
-            <div class="app-content">
-              <div class="study-card">
-                <span>Today’s session</span>
-                <h2>Biology quiz generated by AI</h2>
-                <p>
-                  Review your weak topics, answer smart questions, and keep your
-                  learning streak going.
-                </p>
+            <div class="hero-card-footer">
+              <div>
+                <strong>Interactive learning dashboard</strong>
+                <span>Track progress, review flashcards, and stay motivated.</span>
               </div>
 
-              <div class="mini-grid">
-                <div class="mini-card">
-                  <strong>72%</strong>
-                  <span>Course progress</span>
-                </div>
-
-                <div class="mini-card">
-                  <strong>14</strong>
-                  <span>Day streak</span>
-                </div>
-              </div>
-
-              <div class="mini-card">
-                <strong>2,450 coins</strong>
-                <span>Earn rewards by learning consistently</span>
-                <div class="progress">
-                  <div class="progress-bar"></div>
-                </div>
-              </div>
+              <div class="coin-pill">100 coins</div>
             </div>
           </div>
 
           <div class="floating-card">
-            <strong>Smart revision</strong>
-            <p>FlashMind adapts study materials to your level and language.</p>
+            <strong>Built for consistency</strong>
+            <p>
+              FlashMind combines AI, active recall, and gamification to help
+              students keep learning every day.
+            </p>
           </div>
         </div>
       </section>
@@ -597,7 +690,7 @@
             <h3>AI-generated quizzes</h3>
             <p>
               Create quizzes, flashcards, explanations, and summaries from your
-              own topics or notes.
+              own topics, notes, or learning goals.
             </p>
           </article>
 
@@ -606,7 +699,7 @@
             <h3>Courses and notes</h3>
             <p>
               Organize learning into structured courses, lessons, notes, and
-              review sessions.
+              focused review sessions.
             </p>
           </article>
 
@@ -614,17 +707,17 @@
             <div class="feature-icon">🏆</div>
             <h3>Coins and streaks</h3>
             <p>
-              Stay motivated with rewards, daily streaks, statistics, and a
-              learning shop.
+              Stay motivated with rewards, daily streaks, coins, statistics, and
+              a gamified learning shop.
             </p>
           </article>
 
           <article class="feature">
             <div class="feature-icon">🌍</div>
-            <h3>Multi-language learning</h3>
+            <h3>Multi-language support</h3>
             <p>
-              Learn and generate materials in different languages, adapted to the
-              user’s needs.
+              Generate and study learning materials in different languages,
+              adapted to the user’s needs.
             </p>
           </article>
 
@@ -632,7 +725,8 @@
             <div class="feature-icon">🎙️</div>
             <h3>Voice learning</h3>
             <p>
-              Practice with voice conversations and interactive AI explanations.
+              Practice through interactive voice conversations and AI-powered
+              explanations.
             </p>
           </article>
 
@@ -640,10 +734,86 @@
             <div class="feature-icon">📈</div>
             <h3>Progress insights</h3>
             <p>
-              Track performance, weak areas, completed lessons, and learning
-              consistency.
+              Track completed lessons, weak areas, learning consistency, and
+              performance over time.
             </p>
           </article>
+        </div>
+      </section>
+
+      <section id="preview">
+        <div class="section-title">
+          <h2>Product preview</h2>
+          <p>
+            FlashMind is already being designed and developed as a real learning
+            workspace with AI assistance, flashcards, progress tracking, coins,
+            streaks, and gamified study sessions.
+          </p>
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-card large">
+            <img
+              src="assets/preview-dashboard.png"
+              alt="FlashMind dashboard with streaks, coins, daily challenge, and recent flashcards"
+            />
+            <div class="preview-label">Learning dashboard</div>
+          </div>
+
+          <div class="preview-card">
+            <img
+              src="assets/preview-ai-mode.png"
+              alt="FlashMind AI Mode explaining an educational topic"
+            />
+            <div class="preview-label">AI learning mode</div>
+          </div>
+
+          <div class="preview-card">
+            <img
+              src="assets/preview-dashboard-sidebar.png"
+              alt="FlashMind full workspace with sidebar navigation and learning tools"
+            />
+            <div class="preview-label">Study workspace</div>
+          </div>
+        </div>
+
+        <div class="status-box">
+          <strong>Product status:</strong>
+          FlashMind is currently in active development and preparing for an early
+          access release. This website is the public landing page, while the main
+          application is being developed privately.
+        </div>
+      </section>
+
+      <section id="ai">
+        <div class="use-case">
+          <div>
+            <h2>How FlashMind uses AI</h2>
+            <p>
+              FlashMind is built around practical AI use cases for education:
+              helping students create better study materials, understand difficult
+              topics, and study consistently with personalized support.
+            </p>
+          </div>
+
+          <div class="use-case-list">
+            <div class="use-case-item">
+              <strong>Generate study materials:</strong>
+              quizzes, flashcards, summaries, notes, courses, and explanations.
+            </div>
+
+            <div class="use-case-item">
+              <strong>Personalized learning:</strong>
+              adapt explanations and practice sessions to the user’s level,
+              language, and weak areas.
+            </div>
+
+            <div class="use-case-item">
+              <strong>Conversational study assistant:</strong>
+              help students ask questions, explore topics, and review concepts
+              through AI chat and voice learning.
+            </div>
+          </div>
         </div>
       </section>
 
@@ -655,8 +825,9 @@
             students create better study materials, understand difficult topics,
             and build consistent learning habits with AI.
           </p>
-          <a class="button" href="mailto:contact@flashmind.app">
-            Get in touch
+
+          <a class="button" href="mailto:flashmind.contact@gmail.com">
+            Contact FlashMind
           </a>
         </div>
       </section>
