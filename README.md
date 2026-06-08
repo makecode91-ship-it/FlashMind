@@ -22,6 +22,10 @@ The goal of FlashMind is not only to give users answers, but to help them unders
 * Coins, rewards, and gamification
 * Multi-language learning support
 * Voice-based AI learning assistant
+* Learning shop with unlockable items
+* Rankings and leaderboards
+* Friends system in development
+* Social learning features
 
 ## Project Status
 
